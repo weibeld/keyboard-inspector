@@ -58,7 +58,7 @@ What does a TTY device actually do? From a high-level view, it does two things. 
 
 However, the TTY device does something more between these read and write step. Namely, it interprets and processes input characters (received from the keyboard), and the same applies (in a more limited way) to output characters (to be sent to the screen). This is shown in the following diagram:
 
-![](img/tty-io-processing)
+![](img/tty-io-processing.png)
 
 The purpose of these processings is to move common tasks (that many applications would have to do anyway) into the TTY device so that applications don't have to implement them themselves.
 
