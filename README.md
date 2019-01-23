@@ -16,9 +16,9 @@ Run:
 ./kbi
 ~~~
 
-Now the program prints the [ASCII codes](http://www.asciitable.com/) of the characters (or character sequences) that the keys (or key combinations) of your keyboard produced in hexadecimal and octal notation.
+Now you can start pressing any keys and key combinations on your keyboard, and the program prints the [ASCII codes](http://www.asciitable.com/) of the produced characters, or character sequences, in hexadecimal and octal mode.
 
-To exit, type `Ctrl-C`.
+To exit the program, type `Ctrl-C`.
 
 ## How does it work?
 
@@ -32,7 +32,7 @@ In UNIX, terminal emulators (e.g. xterm, iTerm, Terminal.app, etc.) are connecte
 
 ![](img/tty.png)
 
-The kernel initialises a TTY device for every terminal emulator instance on the system. As a terminal emulator instance counts every terminal emulator window or tab, or window or pane of a terminal multiplexer like [tmux](https://github.com/tmux/tmux) or [screen](https://www.gnu.org/software/screen/). So, for example, if you're running two tabs of iTerm, then you have two terminal emulator instances, and thus two active TTY devices on your system. Or if you're running two panes of tmux in an iTerm window, then you have three terminal emulator instances (one for the iTerm window and two for the tmux tabs), and thus three active TTY devices.
+The kernel initialises a TTY device for every terminal emulator instance on the system. A terminal emulator window or tab, or a window or pane of a terminal multiplexer like [tmux](https://github.com/tmux/tmux) or [screen](https://www.gnu.org/software/screen/) all count as an independent terminal emulator instance. So, for example, if you're running two tabs of iTerm, then you have two terminal emulator instances, and thus two active TTY devices on your system. Or if you're running two panes of tmux in an iTerm window, then you have three terminal emulator instances (one for the iTerm window and two for the tmux tabs), and thus three active TTY devices.
 
 You can think of a TTY device as a terminal driver. Through a TTY device, an application can read input from a terminal (what the user types on the keyboard) and it can write output to this terminal (displayed on the terminal screen). The application talks only to the TTY device, and is thus shielded from the low-level details of communicating directly with the terminal. From the point of view of an application, talking to a TTY device is like talking to a terminal device, hence the name *TTY device*.
 
@@ -54,9 +54,12 @@ As a fun fact: if you write something to the TTY device file of another terminal
 
 ### Actions of a TTY Device
 
-What does a TTY device actually do? From a high-level view, it does two things. First, it receives characters from the terminal keyboard (with hardware terminals they were received on a RS-232 serial port, with terminal emulators it is some other interface) and writes characters to its driver *read* interface (represented by the `/dev/tty*` file). Second, it reads characters from its driver *write* interface (also represented by the `/dev/tty*` file) and sends characters to the terminal screen.
+What does a TTY device actually do? From a high-level view, it does two things:
 
-However, the TTY device does something more between these read and write step. Namely, it interprets and processes input characters (received from the keyboard), and the same applies (in a more limited way) to output characters (to be sent to the screen). This is shown in the following diagram:
+- Reading characters from the terminal keyboard (with hardware terminals they were received on a RS-232 serial port, with terminal emulators it is some other interface), and writing  characters to the driver interface (represented by the `/dev/tty*` file).
+- Reading characters from the driver interface (also represented by the `/dev/tty*` file), and writing characters to the terminal screen.
+
+However, the TTY device does some more things between these read and write actions. Namely, it interprets and processes input characters (received from the keyboard), and the same applies (in a more limited way) to output characters (to be sent to the screen). This is shown in the following diagram:
 
 ![](img/tty-io-processing.png)
 
