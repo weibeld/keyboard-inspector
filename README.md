@@ -16,7 +16,7 @@ Run:
 ./kbi
 ~~~
 
-Now you can start pressing any keys and key combinations on your keyboard, and the program prints the [ASCII codes](http://www.asciitable.com/) of the produced characters, or character sequences, in hexadecimal and octal mode.
+Now you can start pressing any keys and key combinations on your keyboard, and the program prints the [ASCII codes](http://www.asciitable.com/) of the produced characters, or character sequences, in hexadecimal and octal notation.
 
 To exit the program, type `Ctrl-C`.
 
